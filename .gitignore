@@ -123,9 +123,16 @@ dmypy.json
 .pyre/
 
 # AutoStatIQ specific
-uploads/
-results/
-static/plots/
+uploads/*
+!uploads/.gitkeep
+results/*
+!results/.gitkeep
+static/plots/*
+!static/plots/.gitkeep
+logs/*
+!logs/.gitkeep
+temp/*
+!temp/.gitkeep
 *.docx
 *.pdf
 temp_*
