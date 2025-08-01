@@ -25,11 +25,23 @@ import PyPDF2
 import tempfile
 import re
 from datetime import datetime
+from pathlib import Path
 from control_charts import ControlChartAnalyzer
 from advanced_statistics import AdvancedStatisticalAnalyzer
 
 # Load environment variables
 load_dotenv()
+
+# Setup production environment
+def setup_production_environment():
+    """Setup production environment for cloud deployment"""
+    # Create necessary directories
+    directories = ['uploads', 'results', 'static/plots', 'logs']
+    for directory in directories:
+        Path(directory).mkdir(parents=True, exist_ok=True)
+
+# Initialize production setup
+setup_production_environment()
 
 app = Flask(__name__)
 CORS(app)
@@ -44,8 +56,17 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'csv', 'xlsx', 'xls', 'docx', 'json'}
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(RESULTS_FOLDER, exist_ok=True)
 
+# Production configuration
+if os.environ.get('FLASK_ENV') == 'production':
+    app.config.update(
+        DEBUG=False,
+        TESTING=False,
+        MAX_CONTENT_LENGTH=10 * 1024 * 1024,  # 10MB for cloud deployment
+    )
+else:
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB for local development
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
 # OpenAI API configuration
 openai.api_key = os.environ.get('OPENAI_API_KEY')
@@ -971,4 +992,12 @@ def health_check():
         }), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Get port from environment (required for cloud deployment)
+    port = int(os.environ.get("PORT", 5000))
+    
+    # Run application
+    app.run(
+        host='0.0.0.0',  # Required for cloud deployment
+        port=port,       # Use cloud-assigned port
+        debug=os.environ.get('FLASK_ENV') != 'production'
+    )
