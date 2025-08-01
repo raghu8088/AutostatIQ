@@ -1,0 +1,5 @@
+# R Logo Placeholder
+# This is a placeholder file for the R logo
+# Replace this with the actual R logo image (r-logo.png)
+# Recommended size: 100x30 pixels
+# Format: PNG with transparent background

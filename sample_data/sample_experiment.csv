@@ -1,0 +1,16 @@
+Group,Score,Age,Gender,Treatment
+A,85,25,Male,Control
+A,92,28,Female,Control
+A,78,32,Male,Control
+A,88,29,Female,Control
+A,91,26,Male,Control
+B,94,30,Female,Treatment
+B,87,35,Male,Treatment
+B,96,28,Female,Treatment
+B,89,31,Male,Treatment
+B,93,27,Female,Treatment
+C,82,33,Male,Placebo
+C,79,29,Female,Placebo
+C,84,31,Male,Placebo
+C,77,28,Female,Placebo
+C,81,30,Male,Placebo

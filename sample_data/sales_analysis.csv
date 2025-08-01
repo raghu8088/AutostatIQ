@@ -1,0 +1,17 @@
+Product,Sales,Price,Marketing_Spend,Quarter,Region
+Product_A,1250,29.99,5000,Q1,North
+Product_A,1340,29.99,5500,Q2,North
+Product_A,1180,29.99,4800,Q3,North
+Product_A,1420,29.99,6000,Q4,North
+Product_B,980,39.99,4000,Q1,South
+Product_B,1050,39.99,4200,Q2,South
+Product_B,920,39.99,3800,Q3,South
+Product_B,1120,39.99,4500,Q4,South
+Product_C,750,49.99,3000,Q1,East
+Product_C,820,49.99,3200,Q2,East
+Product_C,710,49.99,2800,Q3,East
+Product_C,890,49.99,3500,Q4,East
+Product_D,1650,19.99,7000,Q1,West
+Product_D,1720,19.99,7200,Q2,West
+Product_D,1580,19.99,6800,Q3,West
+Product_D,1840,19.99,7500,Q4,West

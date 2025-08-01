@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoStatIQ API Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .api-section { margin-bottom: 3rem; }
+        .endpoint-card { border-left: 4px solid #007bff; }
+        .method-badge { font-size: 0.75rem; font-weight: bold; }
+        .code-example { background: #2d3748; border-radius: 8px; }
+        pre[class*="language-"] { margin: 0; }
+        .nav-pills .nav-link.active { background-color: #007bff; }
+        .sticky-top { top: 20px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-chart-line me-2"></i>
+                AutoStatIQ API Documentation
+            </a>
+            <a href="/" class="btn btn-outline-light btn-sm">
+                <i class="fas fa-arrow-left me-1"></i>
+                Back to Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sticky-top">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#overview">Overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#authentication">Authentication</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#endpoints">API Endpoints</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#examples">Integration Examples</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#sdks">Client SDKs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#errors">Error Handling</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+                <!-- Overview Section -->
+                <section id="overview" class="api-section">
+                    <h1 class="mb-4">AutoStatIQ API Documentation</h1>
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle me-2"></i>Welcome to AutoStatIQ API</h5>
+                        <p class="mb-0">Integrate powerful statistical analysis capabilities into your applications with our RESTful API. Upload data files, ask natural language questions, and receive comprehensive statistical reports in seconds.</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-server text-primary me-2"></i>Base URL</h5>
+                                    <code>http://127.0.0.1:5000</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-code text-success me-2"></i>Format</h5>
+                                    <code>JSON</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <h5>Supported File Formats</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-primary">CSV</span>
+                                <span class="badge bg-primary">XLSX</span>
+                                <span class="badge bg-primary">DOCX</span>
+                                <span class="badge bg-primary">PDF</span>
+                                <span class="badge bg-primary">JSON</span>
+                                <span class="badge bg-primary">TXT</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Authentication Section -->
+                <section id="authentication" class="api-section">
+                    <h2>Authentication</h2>
+                    <p>Currently, the API is open for development use. For production deployments, add API key authentication:</p>
+                    <div class="code-example p-3">
+                        <pre><code class="language-http">X-API-Key: your_api_key_here</code></pre>
+                    </div>
+                </section>
+
+                <!-- API Endpoints Section -->
+                <section id="endpoints" class="api-section">
+                    <h2>API Endpoints</h2>
+                    
+                    <!-- Health Check Endpoint -->
+                    <div class="card endpoint-card mb-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Health Check</h5>
+                            <span class="badge bg-success method-badge">GET</span>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Endpoint:</strong> <code>/health</code></p>
+                            <p><strong>Description:</strong> Check API health and configuration status</p>
+                            
+                            <h6>Response Example:</h6>
+                            <div class="code-example p-3">
+                                <pre><code class="language-json">{
+  "status": "healthy",
+  "version": "1.0.0",
+  "openai_configured": true,
+  "features": [
+    "file_upload",
+    "statistical_analysis",
+    "intelligent_interpretation",
+    "report_generation",
+    "control_charts",
+    "advanced_statistics"
+  ]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- API Info Endpoint -->
+                    <div class="card endpoint-card mb-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">API Information</h5>
+                            <span class="badge bg-success method-badge">GET</span>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Endpoint:</strong> <code>/api/info</code></p>
+                            <p><strong>Description:</strong> Get comprehensive API information and capabilities</p>
+                            
+                            <h6>Response Example:</h6>
+                            <div class="code-example p-3">
+                                <pre><code class="language-json">{
+  "name": "AutoStatIQ API",
+  "version": "1.0.0",
+  "description": "Statistical Analysis in Sec",
+  "author": "Roman Chaudhary",
+  "contact": "chaudharyroman.com.np",
+  "statistical_methods": [
+    "Descriptive Statistics",
+    "Correlation Analysis",
+    "Regression Analysis",
+    "Hypothesis Testing",
+    "ANOVA",
+    "Control Charts",
+    "PCA",
+    "Clustering"
+  ]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistical Analysis Endpoint -->
+                    <div class="card endpoint-card mb-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Statistical Analysis</h5>
+                            <span class="badge bg-primary method-badge">POST</span>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Endpoint:</strong> <code>/upload</code></p>
+                            <p><strong>Description:</strong> Upload file and perform comprehensive statistical analysis</p>
+                            
+                            <h6>Parameters:</h6>
+                            <ul>
+                                <li><code>file</code> (required) - Multipart file upload (CSV, XLSX, DOCX, PDF, JSON, TXT)</li>
+                                <li><code>question</code> (optional) - Natural language statistical question</li>
+                            </ul>
+
+                            <h6>Response Example:</h6>
+                            <div class="code-example p-3">
+                                <pre><code class="language-json">{
+  "success": true,
+  "message": "Analysis completed successfully",
+  "results": {
+    "summary": { "rows": 100, "columns": 5 },
+    "descriptive_stats": { "mean": 45.2, "std": 12.8 },
+    "correlation": { "correlation_matrix": [...] },
+    "regression": { "r_squared": 0.85, "coefficients": [...] },
+    "hypothesis_tests": { "t_test": {...}, "chi_square": {...} },
+    "anova": { "f_statistic": 12.5, "p_value": 0.001 },
+    "control_charts": { "x_bar": {...}, "r_chart": {...} },
+    "advanced_statistics": { "pca": {...}, "clustering": {...} }
+  },
+  "plots": ["plot1.png", "plot2.png", "plot3.png"],
+  "interpretation": "The dataset shows strong correlations...",
+  "conclusion": "Based on the analysis, we can conclude...",
+  "report_url": "/download/report_12345"
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Download Report Endpoint -->
+                    <div class="card endpoint-card mb-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Download Report</h5>
+                            <span class="badge bg-info method-badge">GET</span>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Endpoint:</strong> <code>/download/&lt;report_id&gt;</code></p>
+                            <p><strong>Description:</strong> Download generated DOCX report</p>
+                            <p><strong>Response:</strong> Binary DOCX file with comprehensive statistical analysis</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Integration Examples Section -->
+                <section id="examples" class="api-section">
+                    <h2>Integration Examples</h2>
+                    
+                    <!-- Language Tabs -->
+                    <ul class="nav nav-tabs" id="exampleTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="python-tab" data-bs-toggle="tab" data-bs-target="#python" type="button">
+                                <i class="fab fa-python me-1"></i>Python
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="javascript-tab" data-bs-toggle="tab" data-bs-target="#javascript" type="button">
+                                <i class="fab fa-js-square me-1"></i>JavaScript
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="r-tab" data-bs-toggle="tab" data-bs-target="#r" type="button">
+                                <i class="fab fa-r-project me-1"></i>R
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="curl-tab" data-bs-toggle="tab" data-bs-target="#curl" type="button">
+                                <i class="fas fa-terminal me-1"></i>cURL
+                            </button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content mt-3">
+                        <div class="tab-pane fade show active" id="python">
+                            <div class="code-example p-3">
+                                <pre><code class="language-python">import requests
+
+# AutoStatIQ Python Client
+class AutoStatIQClient:
+    def __init__(self, base_url="http://127.0.0.1:5000", api_key=None):
+        self.base_url = base_url
+        self.headers = {'X-API-Key': api_key} if api_key else {}
+    
+    def check_health(self):
+        response = requests.get(f"{self.base_url}/health", headers=self.headers)
+        return response.json()
+    
+    def analyze_file(self, file_path, question=None):
+        with open(file_path, 'rb') as file:
+            files = {'file': file}
+            data = {'question': question} if question else {}
+            
+            response = requests.post(
+                f"{self.base_url}/upload",
+                files=files,
+                data=data,
+                headers=self.headers
+            )
+            return response.json()
+    
+    def download_report(self, report_id, save_path):
+        response = requests.get(
+            f"{self.base_url}/download/{report_id}",
+            headers=self.headers
+        )
+        with open(save_path, 'wb') as file:
+            file.write(response.content)
+
+# Usage Example
+client = AutoStatIQClient()
+
+# Check API health
+health = client.check_health()
+print(f"API Status: {health['status']}")
+
+# Analyze dataset
+results = client.analyze_file(
+    "data.csv", 
+    "Perform correlation analysis and hypothesis testing"
+)
+
+print(f"Success: {results['success']}")
+print(f"Plots: {len(results['plots'])}")
+print(f"Interpretation: {results['interpretation'][:100]}...")
+
+# Download report
+if results['success']:
+    report_id = results['report_url'].split('/')[-1]
+    client.download_report(report_id, "statistical_report.docx")
+    print("Report downloaded successfully!")</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="javascript">
+                            <div class="code-example p-3">
+                                <pre><code class="language-javascript">// AutoStatIQ JavaScript Client
+class AutoStatIQClient {
+    constructor(baseUrl = 'http://127.0.0.1:5000', apiKey = null) {
+        this.baseUrl = baseUrl;
+        this.headers = apiKey ? { 'X-API-Key': apiKey } : {};
+    }
+
+    async checkHealth() {
+        const response = await fetch(`${this.baseUrl}/health`, {
+            headers: this.headers
+        });
+        return await response.json();
+    }
+
+    async analyzeFile(file, question = null) {
+        const formData = new FormData();
+        formData.append('file', file);
+        if (question) formData.append('question', question);
+
+        const response = await fetch(`${this.baseUrl}/upload`, {
+            method: 'POST',
+            body: formData,
+            headers: this.headers
+        });
+        
+        return await response.json();
+    }
+
+    async downloadReport(reportId, filename = 'report.docx') {
+        const response = await fetch(`${this.baseUrl}/download/${reportId}`, {
+            headers: this.headers
+        });
+        
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+    }
+}
+
+// Usage Example
+const client = new AutoStatIQClient();
+
+// Check API health
+client.checkHealth().then(health => {
+    console.log(`API Status: ${health.status}`);
+});
+
+// Analyze file from file input
+const fileInput = document.getElementById('fileInput');
+fileInput.addEventListener('change', async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const results = await client.analyzeFile(
+            file, 
+            'Test for normality and perform outlier detection'
+        );
+        
+        console.log(results);
+        
+        if (results.success) {
+            const reportId = results.report_url.split('/').pop();
+            await client.downloadReport(reportId);
+        }
+    }
+});</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="r">
+                            <div class="code-example p-3">
+                                <pre><code class="language-r"># AutoStatIQ R Client
+library(httr)
+library(jsonlite)
+
+# Create AutoStatIQ client
+autostatiq_client <- function(base_url = "http://127.0.0.1:5000", api_key = NULL) {
+  headers <- list()
+  if (!is.null(api_key)) {
+    headers[["X-API-Key"]] <- api_key
+  }
+  
+  list(
+    base_url = base_url,
+    headers = headers,
+    
+    check_health = function() {
+      response <- GET(
+        paste0(base_url, "/health"),
+        add_headers(.headers = headers)
+      )
+      return(content(response, "parsed"))
+    },
+    
+    analyze_file = function(file_path, question = NULL) {
+      body <- list(file = upload_file(file_path))
+      if (!is.null(question)) body$question <- question
+      
+      response <- POST(
+        paste0(base_url, "/upload"),
+        body = body,
+        encode = "multipart",
+        add_headers(.headers = headers)
+      )
+      
+      return(content(response, "parsed"))
+    },
+    
+    download_report = function(report_id, save_path) {
+      response <- GET(
+        paste0(base_url, "/download/", report_id),
+        add_headers(.headers = headers),
+        write_disk(save_path, overwrite = TRUE)
+      )
+      return(save_path)
+    }
+  )
+}
+
+# Usage Example
+client <- autostatiq_client()
+
+# Check API health
+health <- client$check_health()
+cat("API Status:", health$status, "\n")
+
+# Analyze dataset
+results <- client$analyze_file(
+  file_path = "data.csv",
+  question = "Perform ANOVA analysis with post-hoc tests"
+)
+
+cat("Analysis Success:", results$success, "\n")
+cat("Number of visualizations:", length(results$plots), "\n")
+cat("Interpretation:", substr(results$interpretation, 1, 100), "...\n")
+
+# Download report
+if (results$success) {
+  report_id <- basename(results$report_url)
+  report_path <- client$download_report(report_id, "statistical_report.docx")
+  cat("Report saved to:", report_path, "\n")
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="curl">
+                            <div class="code-example p-3">
+                                <pre><code class="language-bash"># Health Check
+curl -X GET http://127.0.0.1:5000/health
+
+# API Information
+curl -X GET http://127.0.0.1:5000/api/info
+
+# Statistical Analysis
+curl -X POST http://127.0.0.1:5000/upload \
+  -F "file=@data.csv" \
+  -F "question=Perform descriptive statistics and correlation analysis"
+
+# With API Key (if required)
+curl -X POST http://127.0.0.1:5000/upload \
+  -H "X-API-Key: your_api_key_here" \
+  -F "file=@data.csv" \
+  -F "question=Test for significant differences between groups"
+
+# Download Report
+curl -X GET http://127.0.0.1:5000/download/report_12345 \
+  -o statistical_report.docx
+
+# Batch Analysis (multiple files)
+for file in *.csv; do
+  echo "Analyzing $file..."
+  curl -X POST http://127.0.0.1:5000/upload \
+    -F "file=@$file" \
+    -F "question=Comprehensive statistical analysis" \
+    -o "${file%.csv}_results.json"
+done</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Client SDKs Section -->
+                <section id="sdks" class="api-section">
+                    <h2>Official Client SDKs</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fab fa-python text-primary me-2"></i>
+                                        Python SDK
+                                    </h5>
+                                    <p class="card-text">Full-featured Python client with error handling and type hints.</p>
+                                    <div class="code-example p-2 mb-2">
+                                        <code>pip install autostatiq-client</code>
+                                    </div>
+                                    <a href="/static/sdks/autostatiq_client.py" class="btn btn-primary btn-sm" download>
+                                        <i class="fas fa-download me-1"></i>Download
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fab fa-js-square text-warning me-2"></i>
+                                        JavaScript SDK
+                                    </h5>
+                                    <p class="card-text">Browser and Node.js compatible client library.</p>
+                                    <div class="code-example p-2 mb-2">
+                                        <code>npm install autostatiq-client</code>
+                                    </div>
+                                    <a href="/static/sdks/autostatiq-client.js" class="btn btn-warning btn-sm" download>
+                                        <i class="fas fa-download me-1"></i>Download
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fab fa-r-project text-info me-2"></i>
+                                        R Package
+                                    </h5>
+                                    <p class="card-text">R integration using httr and jsonlite packages.</p>
+                                    <div class="code-example p-2 mb-2">
+                                        <code>install.packages("AutoStatIQR")</code>
+                                    </div>
+                                    <a href="/static/sdks/AutoStatIQR.R" class="btn btn-info btn-sm" download>
+                                        <i class="fas fa-download me-1"></i>Download
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-terminal text-secondary me-2"></i>
+                                        CLI Tool
+                                    </h5>
+                                    <p class="card-text">Command-line interface for batch processing and automation.</p>
+                                    <div class="code-example p-2 mb-2">
+                                        <code>autostatiq analyze data.csv</code>
+                                    </div>
+                                    <a href="/static/sdks/autostatiq-cli.py" class="btn btn-secondary btn-sm" download>
+                                        <i class="fas fa-download me-1"></i>Download
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Error Handling Section -->
+                <section id="errors" class="api-section">
+                    <h2>Error Handling</h2>
+                    <p>The API uses standard HTTP status codes and returns detailed error messages:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Status Code</th>
+                                    <th>Description</th>
+                                    <th>Example Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge bg-success">200</span></td>
+                                    <td>Success</td>
+                                    <td><code>{"success": true, "results": {...}}</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-warning">400</span></td>
+                                    <td>Bad Request</td>
+                                    <td><code>{"success": false, "error": "Invalid file format"}</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-warning">401</span></td>
+                                    <td>Unauthorized</td>
+                                    <td><code>{"error": "API key required"}</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-warning">413</span></td>
+                                    <td>File Too Large</td>
+                                    <td><code>{"success": false, "error": "File size exceeds 16MB limit"}</code></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-danger">500</span></td>
+                                    <td>Server Error</td>
+                                    <td><code>{"success": false, "error": "Analysis failed: insufficient data"}</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>Common Error Scenarios</h5>
+                    <ul>
+                        <li><strong>Unsupported File Format:</strong> Only CSV, XLSX, DOCX, PDF, JSON, TXT files are supported</li>
+                        <li><strong>Empty Dataset:</strong> File contains no analyzable data</li>
+                        <li><strong>Insufficient Data:</strong> Not enough data points for statistical analysis</li>
+                        <li><strong>Malformed Data:</strong> File is corrupted or contains invalid data</li>
+                        <li><strong>API Timeout:</strong> Analysis takes too long for very large datasets</li>
+                    </ul>
+                </section>
+
+                <!-- Rate Limits Section -->
+                <section id="rate-limits" class="api-section">
+                    <h2>Rate Limits & Best Practices</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Rate Limits</h5>
+                            <ul>
+                                <li><strong>Development:</strong> No limits</li>
+                                <li><strong>Production:</strong> 100 requests/hour per API key</li>
+                                <li><strong>File Size:</strong> Maximum 16MB per upload</li>
+                                <li><strong>Concurrent Requests:</strong> 5 simultaneous analyses</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Best Practices</h5>
+                            <ul>
+                                <li>Clean your data before uploading</li>
+                                <li>Use specific statistical questions for better results</li>
+                                <li>Handle API errors gracefully in your applications</li>
+                                <li>Cache results when possible to reduce API calls</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2025 Roman Chaudhary - AutoStatIQ API Documentation</p>
+            <p>
+                <a href="/" class="text-info me-3">Dashboard</a>
+                <a href="/api/info" class="text-info me-3">API Info</a>
+                <a href="http://chaudharyroman.com.np" class="text-info">Contact</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Update active nav link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.api-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

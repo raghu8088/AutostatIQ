@@ -1,0 +1,5 @@
+# SPSS Logo Placeholder
+# This is a placeholder file for the IBM SPSS logo
+# Replace this with the actual SPSS logo image (spss-logo.png)
+# Recommended size: 100x30 pixels
+# Format: PNG with transparent background
