@@ -1,0 +1,21 @@
+Name,Age,Height,Weight,Salary,Department,Experience,Gender,City
+John Smith,28,175,72,55000,Engineering,3,Male,New York
+Sarah Johnson,34,162,58,62000,Marketing,7,Female,Los Angeles
+Mike Brown,29,180,85,48000,Sales,2,Male,Chicago
+Lisa Davis,31,168,64,71000,Engineering,5,Female,Houston
+Tom Wilson,26,173,78,43000,Sales,1,Male,Phoenix
+Emma Garcia,35,159,55,68000,Marketing,8,Female,Philadelphia
+Chris Lee,30,177,75,59000,Engineering,4,Male,San Antonio
+Amanda White,27,165,61,52000,HR,3,Female,San Diego
+David Taylor,33,182,88,66000,Engineering,6,Male,Dallas
+Jennifer Martinez,29,170,69,57000,Marketing,4,Female,San Jose
+Robert Anderson,32,178,82,63000,Sales,5,Male,Austin
+Jessica Thomas,28,163,56,54000,HR,2,Female,Jacksonville
+Kevin Jackson,36,176,79,72000,Engineering,9,Male,Fort Worth
+Michelle Robinson,30,169,67,61000,Marketing,5,Female,Columbus
+Daniel Clark,31,174,73,58000,Sales,3,Male,Charlotte
+Ashley Lewis,27,161,59,49000,HR,1,Female,San Francisco
+Matthew Walker,34,181,84,69000,Engineering,7,Male,Indianapolis
+Stephanie Hall,29,166,62,56000,Marketing,3,Female,Seattle
+Ryan Allen,28,175,76,51000,Sales,2,Male,Denver
+Nicole Young,32,164,60,65000,HR,6,Female,Washington

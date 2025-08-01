@@ -15,6 +15,8 @@ import base64
 from flask import Flask, render_template, request, jsonify, send_file, flash, redirect, url_for
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
+import uuid
+import time
 import openai
 from dotenv import load_dotenv
 from docx import Document
@@ -732,7 +734,27 @@ class ReportGenerator:
 
 def allowed_file(filename):
     """Check if file extension is allowed"""
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    if not filename:
+        return False
+    return ('.' in filename and 
+            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS)
+
+def generate_unique_filename(filename):
+    """Generate unique filename to prevent conflicts"""
+    if not filename:
+        return None
+        
+    # Secure the filename
+    filename = secure_filename(filename)
+    if not filename:  # secure_filename can return empty string
+        return None
+    
+    # Add timestamp and UUID to prevent conflicts
+    name, ext = os.path.splitext(filename)
+    timestamp = int(time.time())
+    unique_name = f"{name}_{timestamp}_{uuid.uuid4().hex[:8]}{ext}"
+    
+    return unique_name
 
 @app.route('/')
 def index():
@@ -753,9 +775,17 @@ def upload_file():
             return jsonify({'error': 'No file selected'}), 400
         
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+            # Generate unique filename to prevent conflicts
+            filename = generate_unique_filename(file.filename)
+            if not filename:
+                return jsonify({'error': 'Invalid filename'}), 400
+                
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
+            
+            # Verify file was saved and has content
+            if not os.path.exists(file_path) or os.path.getsize(file_path) == 0:
+                return jsonify({'error': 'File upload failed or empty'}), 400
             
             # Get file extension
             file_ext = filename.rsplit('.', 1)[1].lower()
@@ -814,13 +844,17 @@ def upload_file():
                 question, dataset_info
             )
             
-            # Save report
-            report_filename = f"report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.docx"
-            report_path = os.path.join(RESULTS_FOLDER, report_filename)
+            # Save report with unique filename
+            report_filename = f"report_{uuid.uuid4().hex[:8]}.docx"
+            report_path = os.path.join(app.config['RESULTS_FOLDER'], report_filename)
             doc.save(report_path)
             
-            # Clean up uploaded file
-            os.remove(file_path)
+            # Clean up uploaded file after processing
+            try:
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+            except Exception as cleanup_error:
+                print(f"Warning: Could not clean up temp file: {cleanup_error}")
             
             return jsonify({
                 'success': True,
@@ -842,7 +876,7 @@ def upload_file():
 def download_report(filename):
     """Download generated report"""
     try:
-        file_path = os.path.join(RESULTS_FOLDER, filename)
+        file_path = os.path.join(app.config['RESULTS_FOLDER'], filename)
         return send_file(file_path, as_attachment=True)
     except Exception as e:
         return jsonify({'error': f'Download failed: {str(e)}'}), 500
