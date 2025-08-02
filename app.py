@@ -69,6 +69,7 @@ else:
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB for local development
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['RESULTS_FOLDER'] = RESULTS_FOLDER
 
 # OpenAI API configuration
 openai.api_key = os.environ.get('OPENAI_API_KEY')

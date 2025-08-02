@@ -25,11 +25,6 @@ class AutoStatIQ {
             this.downloadReport();
         });
 
-        // File input change
-        document.getElementById('fileInput').addEventListener('change', (e) => {
-            this.handleFileSelection(e);
-        });
-
         // Question-only analysis
         document.getElementById('question').addEventListener('input', (e) => {
             this.toggleAnalysisMode(e.target.value.trim());
@@ -49,6 +44,7 @@ class AutoStatIQ {
             maxFilesize: 16, // 16MB
             acceptedFiles: '.csv,.xlsx,.xls,.docx,.pdf,.json,.txt',
             addRemoveLinks: true,
+            clickable: true, // Enable Dropzone's built-in click functionality
             dictDefaultMessage: `
                 <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
                 <h5>Drop files here or click to upload</h5>
@@ -70,10 +66,14 @@ class AutoStatIQ {
             this.showError(`File upload error: ${message}`);
         });
 
-        // Custom click handler
-        dropzoneElement.addEventListener('click', (e) => {
+        // Additional mobile-friendly touch support
+        dropzoneElement.addEventListener('touchend', (e) => {
             if (e.target.closest('.dz-remove')) return;
-            document.getElementById('fileInput').click();
+            e.preventDefault();
+            // Let Dropzone handle the file selection
+            if (this.dropzone.hiddenFileInput) {
+                this.dropzone.hiddenFileInput.click();
+            }
         });
     }
 
@@ -138,15 +138,6 @@ class AutoStatIQ {
         }
     }
 
-    handleFileSelection(event) {
-        const file = event.target.files[0];
-        if (file) {
-            // Clear existing files and add new one
-            this.dropzone.removeAllFiles();
-            this.dropzone.addFile(file);
-        }
-    }
-
     handleDropzoneFileAdded(file) {
         this.validateForm();
         this.showSuccess(`File "${file.name}" ready for analysis`);
@@ -154,7 +145,6 @@ class AutoStatIQ {
 
     handleDropzoneFileRemoved(file) {
         this.validateForm();
-        document.getElementById('fileInput').value = '';
     }
 
     async handleFormSubmission() {
